@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takas Sitesi</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takas Sitesi</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Yukarıdaki satır, styles.css adlı dış CSS dosyasını bağlar -->
+</head>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Ürünler</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Ürünleri Ara...">
+        </div>
+        <select id="sortSelect" onchange="sortProducts()">
+            <option value="name">İsme Göre Sırala</option>
+            <option value="date">Tarihe Göre Sırala</option>
+            <option value="price">Fiyata Göre Sırala</option>
+        </select>
+        <div class="products">
+            <!-- Ürünler burada listelenecek -->
+        </div>
+    </div>
+
+    <div id="confirmation" class="confirmation">
+        <h2>Ürün Bilgilerini Girin</h2>
+        <input type="text" id="productName" class="modal-input" placeholder="Ürün Adı">
+        <input type="text" id="productDescription" class="modal-input" placeholder="Açıklama">
+        <input type="file" id="productImage" class="modal-input" accept="image/*" placeholder="Fotoğraf Seç">
+        <input type="text" id="productTags" class="modal-input" placeholder="Etiketleri Girin (virgülle ayırın)">
+        <input type="text" id="productID" class="modal-input" placeholder="İlan No" disabled>
+        <input type="date" id="productDate" class="modal-input" placeholder="İlan Tarihi">
+        <select id="productStatus" class="modal-input">
+            <option value="">Kullanım Durumu Seçin</option>
+            <option value="yeni">Yeni</option>
+            <option value="ikinci_el">İkinci El</option>
+            <option value="kotu">Kötü</option>
+        </select>
+        <input type="number" id="productPrice" class="modal-input" placeholder="Fiyat">
+        <button class="button" onclick="addProduct()">Ürünü Paylaş</button>
+        <button class="button" onclick="cancelProductShare()">İptal</button>
+    </div>
+
+    <button class="button" onclick="openProductShareModal()" style="position: fixed; top: 10px; right: 10px;">Ürün Paylaş</button>
+
+
+    <script>
+        function openProductShareModal() {
+            document.getElementById('confirmation').style.display = 'block';
+            document.getElementById('productID').value = generateRandomID();
+        }
+
+        function generateRandomID() {
+            return Math.floor(Math.random() * 1000000);
+        }
+
+        function addProduct() {
+    var productName = document.getElementById('productName').value;
+    var productDescription = document.getElementById('productDescription').value;
+    var productImage = document.getElementById('productImage').files[0];
+    var productTags = document.getElementById('productTags').value.split(',').map(tag => tag.trim());
+    var productID = document.getElementById('productID').value;
+    var productDate = document.getElementById('productDate').value;
+    var productStatus = document.getElementById('productStatus').value;
+    var productPrice = document.getElementById('productPrice').value;
+
+    // Dosya yüklenmiş mi kontrol et
+    if (productImage) {
+        // FileReader kullanarak dosyayı oku
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var productImageDataUrl = event.target.result;
+
+            // Ürünü ekleme işlemleri
+            var productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h2>${productName}</h2>
+                <p>${productDescription}</p>
+                <img src="${productImageDataUrl}" alt="${productName}">
+                <p><strong>İlan No:</strong> ${productID}</p>
+                <p><strong>İlan Tarihi:</strong> ${productDate}</p>
+                <p><strong>Kullanım Durumu:</strong> ${productStatus}</p>
+                <p><strong>Fiyat:</strong> ${productPrice}</p>
+            `;
+            
+            // Etiketleri eklemek için bir döngü
+            var tagsContainer = document.createElement('div');
+            tagsContainer.classList.add('tags');
+            productTags.forEach(tag => {
+                var tagElement = document.createElement('span');
+                tagElement.textContent = tag;
+                tagsContainer.appendChild(tagElement);
+            });
+            
+            productElement.appendChild(tagsContainer);
+            document.querySelector('.products').appendChild(productElement);
+        }
+        reader.readAsDataURL(productImage);
+    } else {
+        alert("Lütfen bir fotoğraf seçin.");
+    }
+
+    // Ürün ekledikten sonra form alanlarını temizle
+    clearFormFields();
+    // Onaylama modalını gizle
+    document.getElementById('confirmation').style.display = 'none';
+}
+
+
+        function cancelProductShare() {
+            clearFormFields(); // Form alanlarını temizle
+            document.getElementById('confirmation').style.display = 'none'; // Onaylama modalını gizle
+        }
+
+        function clearFormFields() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('productTags').value = '';
+            document.getElementById('productID').value = '';
+            document.getElementById('productDate').value = '';
+            document.getElementById('productStatus').value = '';
+            document.getElementById('productPrice').value = '';
+        }
+
+        function searchProducts() {
+            var input, filter, products, product, title, i;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            products = document.getElementsByClassName('product');
+            for (i = 0; i < products.length; i++) {
+                product = products[i];
+                title = product.getElementsByTagName('h2')[0];
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    product.style.display = '';
+                } else {
+                    product.style.display = 'none';
+                }
+            }
+        }
+
+        function sortProducts() {
+            var select, products, sortValue, i, j, shouldSwitch, x, y;
+            select = document.getElementById('sortSelect');
+            sortValue = select.value;
+            products = document.getElementsByClassName('product');
+            for (i = 0; i < products.length - 1; i++) {
+                shouldSwitch = false;
+                for (j = 0; j < products.length - i - 1; j++) {
+                    x = products[j].getElementsByTagName('h2')[0].innerText;
+                    y = products[j + 1].getElementsByTagName('h2')[0].innerText;
+                    if (sortValue === 'date') {
+                        x = new Date(x).getTime();
+                        y = new Date(y).getTime();
+                    } else if (sortValue === 'price') {
+                        x = parseFloat(products[j].getElementsByTagName('p')[3].innerText.split(':')[1]);
+                        y = parseFloat(products[j + 1].getElementsByTagName('p')[3].innerText.split(':')[1]);
+                    }
+                    if (x > y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    products[j].parentNode.insertBefore(products[j + 1], products[j]);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    text-align: center; /* Merkezi konumlandırma */
+}
+h1 {
+    text-align: center;
+}
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.product {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.product h2 {
+    margin-top: 0;
+}
+.product p {
+    color: #666;
+}
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+.tags {
+    margin-top: 10px;
+}
+.tags span {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 5px;
+}
+.button {
+    display: inline-block; /* Butonları yatay hizala */
+    padding: 10px 20px; /* Yatay ve dikey boşluklar */
+    margin-top: 10px; /* Üst boşluk */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+.confirmation {
+    display: none;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+.confirmation h2 {
+    margin-top: 0;
+}
+.confirmation button {
+    margin-top: 10px;
+    background-color: #28a745;
+    transition: background-color 0.3s;
+}
+.confirmation button:hover {
+    background-color: #218838;
+}
+.modal-input {
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#sortSelect {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    margin-top: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    outline: none;
+    margin-right: 5px; /* Yeni eklenen stil */
+}
+
+#sortSelect:hover,
+#sortSelect:focus {
+    border-color: #ff00d4;
+    box-shadow: 0 0 5px rgba(247, 5, 255, 0.5);
+}
+
+#searchInput {
+    padding: 10px; /* Arama kutusu için daha büyük bir boşluk */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 45%; /* Arama kutusunun genişliği */
+    max-width: 300px; /* Maksimum genişlik */
+    margin-left: 5px; /* Yeni eklenen stil */
+}
