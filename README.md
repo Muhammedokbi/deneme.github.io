@@ -1,2 +1,5 @@
-![cat](blob:https://muhammedokbi.github.io/14bbff7f-9bc5-4945-8e22-095cfbef1b51)
 ![cat](https://cdn.discordapp.com/attachments/1192859321286008832/1259634961380671550/image.png?ex=668c65f9&is=668b1479&hm=bf6e9fe902c10caf534e8e9391495c9ed0a43d9e4adbccd58b2432688613a8b7&)
+# telefon 
+![cat](https://cdn.discordapp.com/attachments/1192859321286008832/1259636212134707240/1a206bb5-f13a-4910-a38e-b673621f0f31.png?ex=668c6723&is=668b15a3&hm=3498023da569d34097c3ccf8c043216254517a4afffc1c9b56e3b5e6f917c561&)
+# bilgiseyar
+![cat](https://cdn.discordapp.com/attachments/1192859321286008832/1259636926793777182/b813b670-0288-43d0-b58d-146f7960473f.png?ex=668c67ce&is=668b164e&hm=c4aceba7de0194bd70620b7ecfa4a427566d1fd7b94ba9fb1f9d97f0968abdc9&)
